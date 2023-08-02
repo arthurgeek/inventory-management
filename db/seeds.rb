@@ -49,4 +49,14 @@ end
   end
 end
 
+Location.all.each do |location|
+  Ingredient.all.each do |ingredient|
+    InventoryItem.create({
+                           location:,
+                           ingredient:,
+                           quantity: rand(10..200)
+                         })
+  end
+end
+
 puts '✅ Database seeded' # rubocop:disable Rails/Output

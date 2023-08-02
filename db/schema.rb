@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_08_02_230545) do
+ActiveRecord::Schema[7.0].define(version: 2023_08_02_231007) do
   create_table "ingredient_recipes", force: :cascade do |t|
     t.integer "ingredient_id", null: false
     t.integer "recipe_id", null: false
@@ -27,6 +27,16 @@ ActiveRecord::Schema[7.0].define(version: 2023_08_02_230545) do
     t.decimal "cost", precision: 5, scale: 2
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "inventory_items", force: :cascade do |t|
+    t.integer "location_id", null: false
+    t.integer "ingredient_id", null: false
+    t.decimal "quantity", precision: 5, scale: 2, default: "0.0"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["ingredient_id"], name: "index_inventory_items_on_ingredient_id"
+    t.index ["location_id"], name: "index_inventory_items_on_location_id"
   end
 
   create_table "locations", force: :cascade do |t|
@@ -66,6 +76,8 @@ ActiveRecord::Schema[7.0].define(version: 2023_08_02_230545) do
 
   add_foreign_key "ingredient_recipes", "ingredients"
   add_foreign_key "ingredient_recipes", "recipes"
+  add_foreign_key "inventory_items", "ingredients"
+  add_foreign_key "inventory_items", "locations"
   add_foreign_key "menus", "locations"
   add_foreign_key "menus", "recipes"
 end
