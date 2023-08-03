@@ -9,6 +9,6 @@ class ApplicationController < ActionController::Base
   private
 
   def default_location_not_found
-    render 'default_location_not_found', status: :not_found
+    render 'default_location_not_found', status: :not_found, layout: false
   end
 end

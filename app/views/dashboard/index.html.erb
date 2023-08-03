@@ -1,5 +1,4 @@
-<%= flash[:notice] %>
-
-<h1>Welcome <%= current_user.name %> </h1>
-
-<%= button_to "Sign out", logout_url, method: :delete %>
+<h1 class="block text-2xl font-bold text-gray-800 sm:text-3xl dark:text-white">
+  Welcome
+  <%= current_user.name %>
+</h1>

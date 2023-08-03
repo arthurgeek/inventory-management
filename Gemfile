@@ -46,6 +46,7 @@ group :development, :test, :cypress do
   gem 'debug', platforms: %i[mri mingw x64_mingw]
 
   gem 'cypress-rails'
+  gem 'erb-formatter', require: false
   gem 'faker'
   gem 'rubocop-rails', require: false
 end

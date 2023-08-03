@@ -5,6 +5,8 @@ class SessionsController < ApplicationController
 
   def new
     @staffs = current_location.staffs.all
+
+    render layout: false
   end
 
   def create

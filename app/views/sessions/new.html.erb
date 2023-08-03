@@ -1,10 +1,52 @@
-<%= flash[:notice] %>
+<!DOCTYPE html>
+<html class="relative min-h-full">
+  <%= render "shared/head" %>
 
-<%= form_with url: login_path, scope: :staff do |form| %>
-  <div>
-    <%= form.label :id, "What's your name?" %>
-    <%= form.select :id, @staffs.map { |s| [s.name, s.id] } %>
-  </div>
+  <body class="dark:bg-slate-900 bg-gray-100 flex h-full">
+    <div class="max-w-[85rem] px-4 py-10 sm:px-6 lg:px-8 lg:py-14 mx-auto">
+      <%= render "shared/flash", flash: flash %>
 
-  <%= form.submit "Sign In" %>
-<% end %>
+      <div class="max-w-2xl mx-auto text-center mb-10 lg:mb-14">
+        <h2 class="text-2xl font-bold md:text-4xl md:leading-tight dark:text-white">🤪 🥗 Weird Salads</h2>
+        <h3 class="text-2xl mt-1 text-gray-600 dark:text-gray-400">Select your user</h3>
+      </div>
+
+      <%= form_with url: login_path, scope: :staff do |form| %>
+        <div class="grid grid-cols-2 md:grid-cols-3 gap-8 md:gap-12" x-data>
+          <% @staffs.each do |staff| %>
+            <div
+              class="text-center cursor-pointer"
+              x-data="{ staffId: '<%= staff.id %>' }"
+              @click="$refs.select.value = $data.staffId; $refs.select.form.submit()"
+            >
+              <img
+                class="rounded-xl sm:w-48 sm:h-48 lg:w-60 lg:h-60 mx-auto"
+                src="<%= avatar_url(staff) %>"
+                alt="<%= "#{staff.name}'s Avatar" %>"
+              >
+              <div class="mt-2 sm:mt-4">
+                <h3
+                  class="
+                    text-sm
+                    font-medium
+                    text-gray-800
+                    sm:text-base
+                    lg:text-lg
+                    dark:text-gray-200
+                  "
+                >
+                  <%= staff.name %>
+                </h3>
+              </div>
+            </div>
+          <% end %>
+
+          <div class="invisible">
+            <%= form.select :id, @staffs.map { |s| [s.name, s.id] }, {}, "x-ref": "select" %>
+            <%= form.submit "Sign In" %>
+          </div>
+        </div>
+      <% end %>
+    </div>
+  </body>
+</html>

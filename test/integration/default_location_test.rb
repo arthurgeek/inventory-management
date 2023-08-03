@@ -8,6 +8,6 @@ class DefaultLocationTest < ActionDispatch::IntegrationTest
 
     assert_response :not_found
 
-    assert_select 'h2', 'Default location not found'
+    assert_select 'h1', 'Default location not found'
   end
 end

@@ -2,24 +2,23 @@ describe('login flow', () => {
   it('redirects to login when not logged in', () => {
     cy.visit('/');
 
-    cy.findByRole('button', { name: /sign in/i }).should('exist');
+    cy.findByRole('heading', { name: /select your user/i }).should('exist');
   });
 
   it('only shows staff from the configured location', () => {
     cy.visit('/login');
 
-    cy.findByRole('option', { name: /mary/i }).should('exist');
-    cy.findByRole('option', { name: /richard/i }).should('not.exist');
+    cy.findByRole('heading', { name: /mary/i }).should('exist');
+    cy.findByRole('heading', { name: /richard/i }).should('not.exist');
   });
 
   it('logs staff in', () => {
     cy.visit('/login');
 
-    cy.findByRole('combobox').select('John Doe');
-    cy.findByRole('button', { name: /sign in/i }).click();
+    cy.findByRole('heading', { name: /john/i }).click();
 
     cy.findByText(/signed in/i).should('exist');
-    cy.findByText(/welcome john doe/i).should('exist');
+    cy.findByText(/welcome john/i).should('exist');
 
     cy.visit('/');
 
@@ -29,8 +28,7 @@ describe('login flow', () => {
   it('logs staff out', () => {
     cy.visit('/login');
 
-    cy.findByRole('combobox').select('John Doe');
-    cy.findByRole('button', { name: /sign in/i }).click();
+    cy.findByRole('heading', { name: /john/i }).click();
 
     cy.findByRole('button', { name: /sign out/i }).click();
 

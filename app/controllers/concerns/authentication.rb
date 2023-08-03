@@ -19,7 +19,6 @@ module Authentication
   end
 
   def authenticate_user!
-    flash.keep(:notice)
     redirect_to login_path unless user_signed_in?
   end
 
