@@ -1,0 +1,15 @@
+{
+  "compilerOptions": {
+    "baseUrl": ".",
+    "noEmit": true,
+    "esModuleInterop": true,
+    "moduleResolution": "node",
+    "target": "es2019",
+    "strict": true,
+    "skipLibCheck": true,
+    "resolveJsonModule": true,
+    "types": ["node", "cypress", "@testing-library/cypress"]
+  },
+  "include": ["e2e/**/*", "support/**/*", "../node_modules/cypress", "../node_modules/@testing-library/cypress"],
+  "exclude": ["../node_modules/@types/jest", "../node_modules/@testing-library/jest-dom"]
+}

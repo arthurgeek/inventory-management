@@ -1,0 +1,10 @@
+<%= flash[:notice] %>
+
+<%= form_with url: login_path, scope: :staff do |form| %>
+  <div>
+    <%= form.label :id, "What's your name?" %>
+    <%= form.select :id, @staffs.map { |s| [s.name, s.id] } %>
+  </div>
+
+  <%= form.submit "Sign In" %>
+<% end %>

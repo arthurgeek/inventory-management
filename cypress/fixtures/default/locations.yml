@@ -1,0 +1,7 @@
+default:
+  name: Default Weird Salad Restaurant
+  staffs: [john, mary]
+
+super_salad:
+  name: Super Salad
+  staffs: [rich]

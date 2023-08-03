@@ -4,6 +4,15 @@ require 'faker'
 
 puts '🌱 Seeding database' # rubocop:disable Rails/Output
 
+# Seed default location
+location = Location.create({ name: Rails.configuration.x.location.name })
+
+10.times do
+  location.staffs.create({ name: Faker::Name.unique.name })
+end
+
+# Seed rest
+
 20.times do
   location = Location.create({ name: Faker::Restaurant.unique.name })
 
@@ -49,7 +58,7 @@ end
   end
 end
 
-Location.all.each do |location|
+Location.all.each do |location| # rubocop:todo Lint/ShadowingOuterLocalVariable
   Ingredient.all.each do |ingredient|
     InventoryItem.create({
                            location:,

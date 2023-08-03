@@ -5,7 +5,7 @@
     "build:css": "tailwindcss -i ./app/assets/stylesheets/application.tailwind.css -o ./app/assets/builds/application.css --minify",
     "build": "esbuild app/javascript/*.* --bundle --sourcemap --outdir=app/assets/builds --public-path=/assets",
     "lint": "eslint .",
-    "typecheck": "tsc --project tsconfig.json --noEmit"
+    "typecheck": "tsc --project tsconfig.json --noEmit && tsc --project cypress/tsconfig.json --noEmit"
   },
   "dependencies": {
     "autoprefixer": "^10.4.14",
@@ -15,8 +15,10 @@
     "typescript": "^5.1.6"
   },
   "devDependencies": {
+    "@testing-library/cypress": "^9.0.0",
     "@typescript-eslint/eslint-plugin": "^6.2.1",
     "@typescript-eslint/parser": "^6.2.1",
+    "cypress": "^12.17.3",
     "eslint": "^8.46.0",
     "eslint-config-prettier": "^8.9.0",
     "eslint-config-standard-with-typescript": "^37.0.0",

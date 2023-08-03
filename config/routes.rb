@@ -1,8 +1,10 @@
 # frozen_string_literal: true
 
 Rails.application.routes.draw do
-  # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
+  # sessions
+  post   'login',   to: 'sessions#create'
+  delete 'logout',  to: 'sessions#destroy'
+  get    'login',   to: 'sessions#new'
 
-  # Defines the root path route ("/")
-  # root "articles#index"
+  root 'dashboard#index'
 end
