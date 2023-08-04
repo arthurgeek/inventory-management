@@ -43,8 +43,8 @@ end
 
   Ingredient.order('RANDOM()').limit(rand(2..7)).each do |ingredient|
     IngredientRecipe.create({
-                              recipe:,
-                              ingredient:,
+                              recipe: recipe,
+                              ingredient: ingredient,
                               quantity: Faker::Number.between(from: 0.0, to: 10.0)
                             })
   end
@@ -52,7 +52,7 @@ end
   Location.order('RANDOM()').limit(rand(2..5)).each do |_location|
     Menu.create({
                   location: Location.order('RANDOM()').first,
-                  recipe:,
+                  recipe: recipe,
                   price: recipe.total_cost * rand(1.1..1.3) # apply a random markup to cost
                 })
   end
@@ -61,8 +61,8 @@ end
 Location.all.each do |location| # rubocop:todo Lint/ShadowingOuterLocalVariable
   Ingredient.all.each do |ingredient|
     InventoryItem.create({
-                           location:,
-                           ingredient:,
+                           location: location,
+                           ingredient: ingredient,
                            quantity: rand(10..200)
                          })
   end

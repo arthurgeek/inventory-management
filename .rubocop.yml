@@ -3,6 +3,9 @@ require: rubocop-rails
 Style/Documentation:
   Enabled: false
 
+Style/HashSyntax:
+  EnforcedShorthandSyntax: never
+
 Rails/UnknownEnv:
   Environments:
     - production
