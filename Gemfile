@@ -48,6 +48,7 @@ group :development, :test, :cypress do
   gem 'cypress-rails'
   gem 'erb-formatter', require: false
   gem 'faker'
+  gem 'rspec-rails'
   gem 'rubocop-rails', require: false
 end
 
