@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_08_02_231007) do
+ActiveRecord::Schema[7.0].define(version: 2023_08_04_171708) do
   create_table "ingredient_recipes", force: :cascade do |t|
     t.integer "ingredient_id", null: false
     t.integer "recipe_id", null: false
@@ -27,6 +27,17 @@ ActiveRecord::Schema[7.0].define(version: 2023_08_02_231007) do
     t.decimal "cost", precision: 5, scale: 2
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "inventory_item_changes", force: :cascade do |t|
+    t.string "change_type", null: false
+    t.integer "change_id", null: false
+    t.integer "inventory_item_id"
+    t.decimal "quantity", precision: 5, scale: 2
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["change_type", "change_id"], name: "index_inventory_item_changes_on_change"
+    t.index ["inventory_item_id"], name: "index_inventory_item_changes_on_inventory_item_id"
   end
 
   create_table "inventory_items", force: :cascade do |t|
@@ -74,10 +85,22 @@ ActiveRecord::Schema[7.0].define(version: 2023_08_02_231007) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "stock_changes", force: :cascade do |t|
+    t.integer "location_id", null: false
+    t.integer "staff_id", null: false
+    t.string "type"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["location_id"], name: "index_stock_changes_on_location_id"
+    t.index ["staff_id"], name: "index_stock_changes_on_staff_id"
+  end
+
   add_foreign_key "ingredient_recipes", "ingredients"
   add_foreign_key "ingredient_recipes", "recipes"
   add_foreign_key "inventory_items", "ingredients"
   add_foreign_key "inventory_items", "locations"
   add_foreign_key "menus", "locations"
   add_foreign_key "menus", "recipes"
+  add_foreign_key "stock_changes", "locations"
+  add_foreign_key "stock_changes", "staffs"
 end
