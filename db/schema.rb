@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_08_04_171708) do
+ActiveRecord::Schema[7.0].define(version: 2023_08_04_185444) do
   create_table "ingredient_recipes", force: :cascade do |t|
     t.integer "ingredient_id", null: false
     t.integer "recipe_id", null: false
@@ -79,6 +79,17 @@ ActiveRecord::Schema[7.0].define(version: 2023_08_04_171708) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "sales", force: :cascade do |t|
+    t.integer "location_id", null: false
+    t.integer "staff_id", null: false
+    t.integer "menu_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["location_id"], name: "index_sales_on_location_id"
+    t.index ["menu_id"], name: "index_sales_on_menu_id"
+    t.index ["staff_id"], name: "index_sales_on_staff_id"
+  end
+
   create_table "staffs", force: :cascade do |t|
     t.string "name"
     t.datetime "created_at", null: false
@@ -101,6 +112,9 @@ ActiveRecord::Schema[7.0].define(version: 2023_08_04_171708) do
   add_foreign_key "inventory_items", "locations"
   add_foreign_key "menus", "locations"
   add_foreign_key "menus", "recipes"
+  add_foreign_key "sales", "locations"
+  add_foreign_key "sales", "menus"
+  add_foreign_key "sales", "staffs"
   add_foreign_key "stock_changes", "locations"
   add_foreign_key "stock_changes", "staffs"
 end

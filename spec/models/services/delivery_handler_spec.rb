@@ -54,13 +54,13 @@ RSpec.describe Services::DeliveryHandler do
       end
 
       context 'the associated inventory items' do
-        let(:delivery_item) { delivery_items.first }
+        let(:a_delivery_item) { delivery_items.first }
 
         context 'when a given ingredient is already part of the location inventory' do
           let(:old_quantity) { 5.0 }
           let!(:existing_inventory_item) do
             InventoryItem.create(
-              ingredient: delivery_item.ingredient,
+              ingredient: a_delivery_item.ingredient,
               location: location,
               quantity: old_quantity
             )
@@ -72,7 +72,7 @@ RSpec.describe Services::DeliveryHandler do
 
           it "increases the ingredient's inventory by given quantity" do
             delivery
-            expect(existing_inventory_item.reload.quantity).to eq(old_quantity + delivery_item.quantity)
+            expect(existing_inventory_item.reload.quantity).to eq(old_quantity + a_delivery_item.quantity)
           end
         end
 
@@ -84,8 +84,8 @@ RSpec.describe Services::DeliveryHandler do
           it "sets the inventory item's quantity to the delivered quantity" do
             delivery
 
-            new_inventory_item = InventoryItem.find_by(ingredient: delivery_item.ingredient, location: location)
-            expect(new_inventory_item.quantity).to eq(delivery_item.quantity)
+            new_inventory_item = InventoryItem.find_by(ingredient: a_delivery_item.ingredient, location: location)
+            expect(new_inventory_item.quantity).to eq(a_delivery_item.quantity)
           end
         end
       end
