@@ -1,22 +1,11 @@
 # frozen_string_literal: true
 
 require 'rails_helper'
+require 'shared/contexts/delivery_and_waste'
 
 # rubocop:disable Metrics/BlockLength
 RSpec.describe Services::DeliveryHandler do
-  let(:location) { Location.create(name: 'Super Salad') }
-  let(:staff) { Staff.create(name: 'John Doe', locations: [location]) }
-  let(:delivery_items) do
-    [
-      IngredientWithQuantity.new(ingredient: Ingredient.create(name: 'Tomatoes', unit: 'kilos', cost: 1.6),
-                                 quantity: 3.0),
-      IngredientWithQuantity.new(ingredient: Ingredient.create(name: 'Lettuce', unit: 'kilos', cost: 2.3),
-                                 quantity: 2.0)
-    ]
-  end
-  subject(:delivery_handler) do
-    Services::DeliveryHandler.new(delivery_items: delivery_items, location: location, staff: staff)
-  end
+  include_context 'delivery context'
 
   describe 'accepting a delivery' do
     it 'creates a new delivery in the database' do
