@@ -3,7 +3,8 @@
   "private": "true",
   "scripts": {
     "build:css": "tailwindcss -i ./app/assets/stylesheets/application.tailwind.css -o ./app/assets/builds/application.css --minify",
-    "build": "esbuild app/javascript/*.* --bundle --sourcemap --outdir=app/assets/builds --public-path=/assets",
+    "build:js": "esbuild app/javascript/*.* --bundle --sourcemap --outdir=app/assets/builds --public-path=/assets",
+    "build:all": "yarn run build:css && yarn build:js",
     "lint": "eslint .",
     "typecheck": "tsc --project tsconfig.json --noEmit && tsc --project cypress/tsconfig.json --noEmit"
   },

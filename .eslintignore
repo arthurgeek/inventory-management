@@ -4,3 +4,4 @@ tailwind.config.js
 cypress/support/routes.ts
 cypress/support/routes.d.ts
 cypress.config.js
+vendor/*
