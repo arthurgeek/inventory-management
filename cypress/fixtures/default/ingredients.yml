@@ -12,3 +12,8 @@ camomile_tea:
   name: Camomile Tea
   unit: liters
   cost: 0.32
+
+garlic:
+  name: Garlic
+  unit: kilos
+  cost: 1.15

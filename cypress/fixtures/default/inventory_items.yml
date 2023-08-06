@@ -2,13 +2,26 @@ inv_paprika:
   location: default
   ingredient: paprika
   quantity: 10
+  created_at: <%= 5.days.ago %>
+  updated_at: <%= 5.days.ago %>
 
 inv_shiitake:
   location: default
   ingredient: shiitake
   quantity: 3
+  created_at: <%= 5.days.ago %>
+  updated_at: <%= 5.days.ago %>
 
 inv_camomile_tea:
   location: super_salad
   ingredient: camomile_tea
   quantity: 4
+  created_at: <%= 5.days.ago %>
+  updated_at: <%= 5.days.ago %>
+
+inv_garlic:
+  location: default
+  ingredient: garlic
+  quantity: 10
+  created_at: <%= 5.days.ago %>
+  updated_at: <%= 5.days.ago %>

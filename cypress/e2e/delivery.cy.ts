@@ -162,6 +162,43 @@ describe('accepting a delivery', () => {
             cy.findByRole('row', { name: /mushroom/i }).within(() => {
               cy.findByText(/4.0 kilos/i).should('exist');
             });
+
+            cy.findByRole('row', { name: /garlic/i }).within(() => {
+              cy.findByText(/10.0 kilos/i).should('exist');
+            });
+          });
+
+          it('update the updated_at timestamp for each changed item', () => {
+            cy.findByRole('heading', { level: 3, name: /paprika/i })
+              .next()
+              .within(() => {
+                cy.findByRole('button', { name: '+' }).click();
+              });
+
+            cy.findByRole('heading', { level: 3, name: /mushroom/i })
+              .next()
+              .within(() => {
+                cy.findByRole('button', { name: '+' }).click();
+              });
+
+            cy.findByRole('button', { name: /accept delivery/i }).click();
+
+            const today = new RegExp(
+              `${new Date().toLocaleDateString('en-us', { year: 'numeric', month: 'short', day: '2-digit' })}`,
+              'i'
+            );
+
+            cy.findByRole('row', { name: /paprika/i }).within(() => {
+              cy.findByText(today).should('exist');
+            });
+
+            cy.findByRole('row', { name: /mushroom/i }).within(() => {
+              cy.findByText(today).should('exist');
+            });
+
+            cy.findByRole('row', { name: /garlic/i }).within(() => {
+              cy.findByText(today).should('not.exist');
+            });
           });
         });
       });
