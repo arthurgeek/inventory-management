@@ -1,24 +1,80 @@
-# README
+# Inventory Management
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+## Dependencies
 
-Things you may want to cover:
+- Ruby (tested with version 3.2.2)
+- Node.js (tested with version 20)
 
-* Ruby version
+## Setup
 
-* System dependencies
+### App setup
 
-* Configuration
+The command below will install all needed dependencies for the backend application and setup the database.
 
-* Database creation
+```sh
+bin/rails setup
+```
 
-* Database initialization
+After that, you'll need to setup the frontend dependencies. Just run:
 
-* How to run the test suite
+```sh
+yarn
+```
 
-* Services (job queues, cache servers, search engines, etc.)
+And, lastly, you need to seed some data to the database. Run:
 
-* Deployment instructions
+```sh
+bin/rails db:seed
+```
 
-* ...
+### Configure the Location name
+
+Finally, before starting the server, change the file under `config/application.rb` and look for `config.x.location.name`. In there, you'll set the name of your location.
+
+### Start the server
+
+And, finally, start the server:
+
+```sh
+bin/dev
+```
+
+## Developing the application
+
+### Run unit tests
+
+This uses tests from both minitest and rspec. To run them:
+
+Minitest:
+
+```sh
+bin/rails test
+```
+
+RSpec:
+
+```sh
+bin/bundle exec rspec
+```
+
+### Run E2E tests
+
+This app uses Cypress for E2E tests.
+
+There are 2 ways to execute Cypress's tests.
+
+#### Headless
+
+This will run the tests in a headless browser and show the results in the terminal.
+
+```sh
+RAILS_ENV='cypress' rake cypress:run
+```
+
+#### Iterative
+
+This will open the Cypress application, which will use a real browser to run your tests in an interactive, easy to inspect test runner, with real browser visualization.
+
+```sh
+RAILS_ENV='cypress' rake cypress:open
+```
