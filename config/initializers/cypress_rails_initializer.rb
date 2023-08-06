@@ -13,7 +13,7 @@ CypressRails.hooks.before_server_start do
 
   # Load some default data
   fixtures_dir = '../../cypress/fixtures/default'
-  fixtures_files = 'locations,staffs'
+  fixtures_files = 'locations,staffs,ingredients,inventory_items'
 
   ENV['FIXTURES_DIR'] = fixtures_dir
   ENV['FIXTURES'] = fixtures_files

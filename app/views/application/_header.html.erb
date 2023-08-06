@@ -128,22 +128,9 @@
           min-[820px]:pl-7
         "
       >
-        <a
-          class="font-medium text-blue-600 min-[820px]:py-6 dark:text-blue-500"
-          href="#"
-          aria-current="page"
-        >Dashboard</a>
-        <a
-          class="
-            font-medium
-            text-gray-500
-            hover:text-gray-400
-            min-[820px]:py-6
-            dark:text-gray-400
-            dark:hover:text-gray-500
-          "
-          href="#"
-        >Accept Deliveries</a>
+        <%= nav_link "Dashboard", root_url -%>
+        <%= nav_link "Inventory", inventory_url -%>
+        <%= nav_link "Accept Deliveries", accept_delivery_url -%>
         <a
           class="
             font-medium

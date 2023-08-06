@@ -1,0 +1,14 @@
+paprika:
+  name: Paprika
+  unit: kilos
+  cost: 3.20
+
+shiitake:
+  name: Shiitake Mushrooms
+  unit: kilos
+  cost: 6.45
+
+camomile_tea:
+  name: Camomile Tea
+  unit: liters
+  cost: 0.32

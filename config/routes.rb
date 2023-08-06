@@ -6,5 +6,12 @@ Rails.application.routes.draw do
   delete 'logout',  to: 'sessions#destroy'
   get    'login',   to: 'sessions#new'
 
+  # deliveries
+  get 'accept_delivery', to: 'deliveries#new'
+  post 'accept_delivery', to: 'deliveries#create'
+
+  # inventory
+  get 'inventory', to: 'inventory#index'
+
   root 'dashboard#index'
 end

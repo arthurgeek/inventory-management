@@ -1,0 +1,14 @@
+inv_paprika:
+  location: default
+  ingredient: paprika
+  quantity: 10
+
+inv_shiitake:
+  location: default
+  ingredient: shiitake
+  quantity: 3
+
+inv_camomile_tea:
+  location: super_salad
+  ingredient: camomile_tea
+  quantity: 4

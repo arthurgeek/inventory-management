@@ -1,0 +1,223 @@
+<%= javascript_include_tag "delivery", defer: true %>
+
+<div x-data="ingredients(<%= @ingredients %>)" x-init="$refs.search.focus()">
+  <input
+    type="text"
+    class="
+      py-3
+      px-4
+      block
+      w-full
+      border-gray-200
+      rounded-md
+      text-sm
+      focus:border-blue-500
+      focus:ring-blue-500
+      dark:bg-slate-900
+      dark:border-gray-700
+      dark:text-gray-400
+      sm:p-5
+      mb-6
+    "
+    placeholder="Search"
+    x-model="search"
+    x-ref="search"
+  >
+
+  <div
+    class="
+      grid
+      grid-cols-2
+      lg:grid-cols-3
+      xl:grid-cols-4
+      gap-6
+      md:gap-10
+      mb-40
+    "
+  >
+    <template x-for="ingredient in filteredIngredients" :key="ingredient.id">
+      <div
+        class="
+          flex
+          flex-col
+          bg-white
+          border
+          shadow-sm
+          rounded-xl
+          hover:shadow-lg
+          transition
+          dark:bg-gray-800
+          dark:border-gray-700
+          dark:shadow-slate-700/[.7]
+        "
+        x-data="{ quantity: 0, id: ingredient.id, unit: ingredient.unit }"
+      >
+        <img
+          class="w-full h-auto rounded-t-xl"
+          src="/ingredient_placeholder.jpg"
+          :alt="ingredient.name"
+        >
+        <div class="p-4 md:p-5">
+          <h3
+            class="text-lg font-bold text-gray-800 dark:text-white"
+            x-text="ingredient.name"
+          >
+          </h3>
+          <p class="mt-1 text-gray-800 dark:text-gray-400 flex justify-between">
+            <button
+              type="button"
+              class="
+                inline-flex
+                flex-shrink-0
+                justify-center
+                items-center
+                gap-2
+                h-[2.875rem]
+                w-[2.875rem]
+                rounded-md
+                border
+                border-transparent
+                font-semibold
+                focus:outline-none
+                focus:ring-2
+                focus:ring-offset-2
+                transition-all
+                text-sm
+              "
+              :class="quantity > 0 ? 'bg-blue-500 text-white hover:bg-blue-600 focus:ring-blue-500 dark:focus:ring-offset-gray-800' : quantity === 0 ? 'cursor-not-allowed' : 'bg-gray-100 text-gray-500 hover:text-white hover:bg-gray-500 focus:ring-gray-500 dark:bg-gray-700 dark:hover:bg-gray-600 dark:focus:ring-gray-600 dark:text-white'"
+              :disabled="quantity === 0"
+              @click="quantity--; quantity === 0 && delete $store.selectedIngredients[id]"
+            >
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="16"
+                height="16"
+                fill="currentColor"
+                class="w-8 h-8"
+                viewBox="0 0 16 16"
+              >
+                <path
+                  fill-rule="evenodd"
+                  d="M2 8a.5.5 0 0 1 .5-.5h11a.5.5 0 0 1 0 1h-11A.5.5 0 0 1 2 8Z"
+                />
+              </svg>
+              <p class="sr-only">-</p>
+            </button>
+
+            <span
+              class="
+                inline-flex
+                h-[2.875rem]
+                w-[6.875rem]
+                justify-center
+                items-center
+                text-lg
+              "
+              x-text="quantityWithUnits(quantity, unit)"
+            >
+              0
+            </span>
+
+            <button
+              type="button"
+              class="
+                inline-flex
+                flex-shrink-0
+                justify-center
+                items-center
+                gap-2
+                h-[2.875rem]
+                w-[2.875rem]
+                rounded-md
+                border
+                border-transparent
+                font-semibold
+                focus:outline-none
+                focus:ring-2
+                focus:ring-offset-2
+                transition-all
+                text-sm
+              "
+              :class="quantity > 0 ? 'bg-blue-500 text-white hover:bg-blue-600 focus:ring-blue-500 dark:focus:ring-offset-gray-800' : 'bg-gray-100 text-gray-500 hover:text-white hover:bg-gray-500 focus:ring-gray-500 dark:bg-gray-700 dark:hover:bg-gray-600 dark:focus:ring-gray-600 dark:text-white'"
+              @click="quantity++; $store.selectedIngredients[id] = { id: id, quantity: quantity }"
+            >
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="16"
+                height="16"
+                fill="currentColor"
+                class="w-8 h-8"
+                viewBox="0 0 16 16"
+              >
+                <path
+                  d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4z"
+                />
+              </svg>
+              <p class="sr-only">+</p>
+            </button>
+          </p>
+        </div>
+      </div>
+    </template>
+  </div>
+
+  <div
+    class="
+      fixed
+      bottom-0
+      left-1/2
+      transform
+      -translate-x-1/2
+      z-[60]
+      sm:max-w-4xl
+      w-full
+      mx-auto
+      p-6
+    "
+  >
+    <div
+      class="
+        p-6
+        bg-white
+        border
+        border-gray-200
+        rounded-xl
+        shadow-sm
+        dark:bg-gray-800
+        dark:border-gray-700
+      "
+    >
+      <div class="flex justify-between items-center">
+        <button
+          type="button"
+          class="
+            w-full
+            py-3
+            px-4
+            inline-flex
+            justify-center
+            items-center
+            gap-2
+            rounded-md
+            border
+            border-transparent
+            font-semibold
+            text-white
+            focus:outline-none
+            focus:ring-2
+            focus:ring-blue-500
+            focus:ring-offset-2
+            transition-all
+            text-sm
+            dark:focus:ring-offset-gray-800
+          "
+          :class="Object.keys($store.selectedIngredients).length === 0 ? 'bg-blue-400 cursor-not-allowed' : 'bg-blue-500 hover:bg-blue-600'"
+          :disabled="Object.keys($store.selectedIngredients).length === 0"
+          @click="acceptDelivery"
+        >
+          Accept Delivery
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
