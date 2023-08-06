@@ -1,5 +1,5 @@
 app/assets/config/manifest.js
-app/assets/builds/application.js
+app/assets/builds/*.js
 tailwind.config.js
 cypress/support/routes.ts
 cypress/support/routes.d.ts
