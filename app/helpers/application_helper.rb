@@ -6,7 +6,7 @@ module ApplicationHelper
   end
 
   def nav_link(text, route)
-    base_classes = 'font-medium min-[820px]:py-6'
+    base_classes = 'font-medium'
 
     if current_page?(route)
       link_to(text, route, 'aria-current': 'page', class: "#{base_classes} text-blue-600 dark:text-blue-500")
